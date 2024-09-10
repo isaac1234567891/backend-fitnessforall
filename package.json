@@ -1,0 +1,12 @@
+{
+  "name": "backend-ecommerce",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node --watch ./src/index.js"
+  },
+  "keywords": [ "express", "mongoose", "bcrypt" ],
+  "author": "Juan Carlos Jiménez Gutiérrez <jcjimenez29@misena.edu.co>",
+  "license": "ISC",
+  "description": "BackEnd: API para un E-Commerce"
+}
