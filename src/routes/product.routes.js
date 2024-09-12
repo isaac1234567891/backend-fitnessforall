@@ -1,14 +1,16 @@
 const express = require( 'express' );
-const { getProducts, getProductsByElectronics } = require('../controllers/product.controller');
 const router = express.Router();
 
-/** Definir las rutas */
+const { getProducts, createProduct, updateProductPut, updateProductPatch, deleteProduct } = require('../controllers/product.controller');
 
-// http://localhost:3000/api/products/
-router.get( '/', getProducts );
-
-// http://localhost:3000/api/products/electronica
-router.get( '/electronica', getProductsByElectronics );
+/** Definir las rutas para la entidad producto
+ * http://localhost:3000/api/products/
+*/
+router.get( '/', getProducts );             // Obtiene todos los productos
+router.post( '/', createProduct  );         // Crear un producto
+router.put( '/', updateProductPut );        // Actualiza todos los campos de un producto
+router.patch( '/', updateProductPatch );    // Actualiza parcialmente los campos de un producto
+router.delete( '/', deleteProduct );        // Elimina un producto
 
 
 module.exports = router;

@@ -1,19 +1,44 @@
+// Muestra todos los productos registrados
 function getProducts( req, res ) {
     res.json({
         ok: true,
-        msg: 'Obtiene el listado de productos'
+        msg: 'Obtener todos los productos'
     });
 }
 
-const getProductsByElectronics = ( req, res ) => {
+function createProduct( req, res ) {
     res.json({
         ok: true,
-        msg: 'Obtiene el listado de productos por categoria (electronica)'
+        msg: 'Crea un producto'
+    });
+}
+
+function updateProductPut( req, res ) {
+    res.json({
+        ok: true,
+        msg: 'Actualiza todos los campos del producto'
+    });
+}
+
+function updateProductPatch( req, res ) {
+    res.json({
+        ok: true,
+        msg: 'Actualiza parcialmente los campos del producto'
+    });
+}
+
+function deleteProduct( req, res ) {
+    res.json({
+        ok: true,
+        msg: 'Elimina un producto'
     });
 }
 
 
 module.exports = {
     getProducts,
-    getProductsByElectronics
-};
+    createProduct,
+    updateProductPut,
+    updateProductPatch,
+    deleteProduct
+}
