@@ -1,15 +1,27 @@
+const ProductModel = require( '../models/Product.model' );
+
+
 // Muestra todos los productos registrados
 function getProducts( req, res ) {
+   
+
     res.json({
         ok: true,
         msg: 'Obtener todos los productos'
     });
 }
 
-function createProduct( req, res ) {
+async function createProduct( req, res ) {
+    const inputData = req.body;
+    console.log( inputData );       // Testing
+
+    const data = await ProductModel.create( inputData );
+    console.log( data );            // Testing
+
     res.json({
         ok: true,
-        msg: 'Crea un producto'
+        msg: 'Crea un producto',
+        data            // ECMAScript data: data ---> data
     });
 }
 

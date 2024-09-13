@@ -6,11 +6,12 @@ const dbConection = require( './config/mongo.config' );
 /** Establecer la conexion a MongoDB usando la configuracion */
 dbConection();
 
-/** EndPoints de nuestro servidor */
+/** MIDDLEWARE: */
+app.use( express.json() );              // Middleware: Permite manejar JSON en las solicitudes
 
-// http://localhost:3000/api/products
-app.use( '/api/products', require( './routes/product.routes' ) );
-        
+/** EndPoints de nuestro servidor */
+app.use( '/api/products', require( './routes/product.routes' ) );   // Middleware: Activa solicitudes que comienzan con el prefijo /api/products
+
 
 /** Lanzamos el servidor en puerto indicado 
  * http://localhost:3000
