@@ -1,12 +1,45 @@
-const { dbInsertProduct } = require('../services/product.service');
+const { dbInsertProduct, dbGetProducts, dbGetProductById, dbDeleteProduct } = require('../services/product.service');
 
 
 // Muestra todos los productos registrados
-function getProducts( req, res ) {
-    res.json({
-        ok: true,
-        msg: 'Obtener todos los productos'
-    });
+async function getProducts( req, res ) {
+    /** ! TODO: Obtener los productos paginados */
+    try {
+        const data = await dbGetProducts();
+
+        res.json({
+            ok: true,
+            data
+        });    
+    } 
+    catch ( error ) {
+        console.error( error );
+        res.json({
+            ok: false,
+            msg: 'Error al obtener todos los productos'
+        });
+    }
+}
+
+async function getProductById( req, res ) {
+    const productId = req.params.id;
+
+    try {
+        const data = await dbGetProductById( productId );
+
+        res.json({
+            ok: true,
+            data
+        });
+    } 
+    catch ( error ) {
+        console.error( error );
+        res.json({
+            ok: false,
+            msg: 'Error al obtener un producto por ID'
+        })  
+    }
+
 }
 
 async function createProduct( req, res ) {
@@ -19,8 +52,7 @@ async function createProduct( req, res ) {
     
         res.json({
             ok: true,
-            msg: 'Crea un producto',
-            data            // ECMAScript data: data ---> data
+            data           // ECMAScript data: data ---> data
         });        
     } 
     catch ( error ) {
@@ -30,7 +62,6 @@ async function createProduct( req, res ) {
             msg: 'Error al crear un producto'
         })
     }
-
 
 }
 
@@ -48,16 +79,33 @@ function updateProductPatch( req, res ) {
     });
 }
 
-function deleteProduct( req, res ) {
-    res.json({
-        ok: true,
-        msg: 'Elimina un producto'
-    });
+async function deleteProduct( req, res ) {
+    const productId = req.params.id;
+    /** ! TODO: Validar cuando no encuentra un producto y responder al usuario */
+
+    try {
+        const data = await dbDeleteProduct( productId );
+
+        res.json({
+            ok: true,
+            data
+        });    
+    } 
+    catch ( error ) {
+        console.error( error );
+        res.json({
+            ok: false,
+            msg: 'Error al eliminar un producto por ID'
+        })
+    }
+
+    
 }
 
 
 module.exports = {
     getProducts,
+    getProductById,
     createProduct,
     updateProductPut,
     updateProductPatch,
