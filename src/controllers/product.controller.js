@@ -1,4 +1,4 @@
-const { dbInsertProduct, dbGetProducts, dbGetProductById, dbDeleteProduct } = require('../services/product.service');
+const { dbInsertProduct, dbGetProducts, dbGetProductById, dbDeleteProduct, dbUpdateProduct } = require('../services/product.service');
 
 
 // Muestra todos los productos registrados
@@ -72,11 +72,25 @@ function updateProductPut( req, res ) {
     });
 }
 
-function updateProductPatch( req, res ) {
-    res.json({
-        ok: true,
-        msg: 'Actualiza parcialmente los campos del producto'
-    });
+async function updateProductPatch( req, res ) {
+    const productId = req.params.id;
+    const inputData = req.body;
+
+    try {
+        const data = await dbUpdateProduct( productId, inputData );
+
+        res.json({
+            ok: true,
+            data
+        });    
+    } 
+    catch ( error ) {
+        console.error( error );
+        res.json({
+            ok: false,
+            msg: 'Error al actualizar un producto por ID'
+        })   
+    }
 }
 
 async function deleteProduct( req, res ) {
