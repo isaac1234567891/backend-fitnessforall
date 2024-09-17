@@ -7,14 +7,14 @@ async function getProducts( req, res ) {
     try {
         const data = await dbGetProducts();
 
-        res.json({
+        res.status( 200 ).json({
             ok: true,
             data
         });    
     } 
     catch ( error ) {
         console.error( error );
-        res.json({
+        res.status( 500 ).json({
             ok: false,
             msg: 'Error al obtener todos los productos'
         });
@@ -27,14 +27,22 @@ async function getProductById( req, res ) {
     try {
         const data = await dbGetProductById( productId );
 
-        res.json({
+        /** Valida si el producto NO fue encontrado */
+        if( ! data ) {
+            res.status( 404 ).json({
+                ok: false,
+                msg: 'Producto no encontrado'
+            });
+        } 
+
+        res.status( 200 ).json({
             ok: true,
             data
         });
     } 
     catch ( error ) {
         console.error( error );
-        res.json({
+        res.status( 500 ).json({
             ok: false,
             msg: 'Error al obtener un producto por ID'
         })  
@@ -50,14 +58,14 @@ async function createProduct( req, res ) {
         const data = await dbInsertProduct( inputData );
         console.log( data );            // Testing
     
-        res.json({
+        res.status( 201 ).json({
             ok: true,
             data           // ECMAScript data: data ---> data
         });        
     } 
     catch ( error ) {
         console.error( error );
-        res.json({
+        res.status( 500 ).json({
             ok: false,
             msg: 'Error al crear un producto'
         })
@@ -79,14 +87,14 @@ async function updateProductPatch( req, res ) {
     try {
         const data = await dbUpdateProduct( productId, inputData );
 
-        res.json({
+        res.status( 200 ).json({
             ok: true,
             data
         });    
     } 
     catch ( error ) {
         console.error( error );
-        res.json({
+        res.status( 500 ).json({
             ok: false,
             msg: 'Error al actualizar un producto por ID'
         })   
@@ -100,14 +108,14 @@ async function deleteProduct( req, res ) {
     try {
         const data = await dbDeleteProduct( productId );
 
-        res.json({
+        res.status( 200 ).json({
             ok: true,
             data
         });    
     } 
     catch ( error ) {
         console.error( error );
-        res.json({
+        res.status( 500 ).json({
             ok: false,
             msg: 'Error al eliminar un producto por ID'
         })
