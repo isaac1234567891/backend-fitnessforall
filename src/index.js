@@ -1,5 +1,6 @@
 const express = require( 'express' );
 const app = express();
+const PORT = process.env.PORT;
 
 const dbConection = require( './config/mongo.config' );
 
@@ -16,6 +17,6 @@ app.use( '/api/auth', require( './routes/auth.routes' ) );          // Middlewar
 /** Lanzamos el servidor en puerto indicado 
  * http://localhost:3000
 */
-app.listen( 3000, function() {
+app.listen( PORT, function() {
     console.log( 'Servidor corriendo en puerto 3000' );
 });
