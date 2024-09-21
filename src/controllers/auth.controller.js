@@ -2,6 +2,8 @@ const { verifyEncriptedPassword } = require("../helpers/bcrypt.helper");
 const UserModel = require("../models/User.model");
 const { dbGetUserByUsername, dbRegisterUser } = require("../services/auth.service");
 
+const { generateToken } = require( '../helpers/jwt.helper' );
+
 async function register( req, res ) {
     // Paso 1: Obtener los datos a registrar (usuario)
     const inputData = req.body;
@@ -53,9 +55,20 @@ async function login( req, res ) {
         });
     }
 
+    // Paso 4: Generar credencial para autenticacion pasiva (Token)
+    const payload = {
+        id: userFound._id,
+        name: userFound.name,
+        username: userFound.username,
+        role: userFound.role
+    };
+    
+    const token = generateToken( payload );
+
+    // Paso 5: Responder al cliente enviandole el Token
     res.json({
         ok: true,
-        msg: 'Autentica un usuario'
+        token
     });
 }
 
