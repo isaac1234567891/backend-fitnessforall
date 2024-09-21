@@ -13,7 +13,15 @@ const encryptedPassword = ( pass ) => {
     return hashPassword;
 }
 
+const verifyEncriptedPassword = ( pass, hashPass ) => {
+    return bcrypt.compareSync( 
+        pass,       // Password original del usuario
+        hashPass    // Cadena aleatoria
+    );
+}
+
 
 module.exports = {
-    encryptedPassword
+    encryptedPassword,
+    verifyEncriptedPassword
 }

@@ -1,3 +1,4 @@
+const { verifyEncriptedPassword } = require("../helpers/bcrypt.helper");
 const UserModel = require("../models/User.model");
 const { dbGetUserByUsername, dbRegisterUser } = require("../services/auth.service");
 
@@ -28,7 +29,30 @@ async function register( req, res ) {
     });
 }
 
-function login( req, res ) {
+async function login( req, res ) {
+    // Paso 1: Obtener los datos para autenticar el usuario (username, password) 
+    const inputData = req.body;
+
+    // Paso 2: Verificar si el usuario existe en la BD  -->  email
+    const userFound = await dbGetUserByUsername( inputData.username );
+     
+    if( ! userFound ) {
+        return res.json({
+            ok: false,
+            msg: 'El usuario no existe. Por favor registrese'
+        });
+    }
+
+    // Paso 3: Verificar si la contrasenia conhincide
+    const isValidPassword = verifyEncriptedPassword( inputData.password, userFound.password );
+
+    if( ! isValidPassword ) {
+        return res.json({
+            ok: false,
+            msg: 'Contraseña invalida'
+        });
+    }
+
     res.json({
         ok: true,
         msg: 'Autentica un usuario'
