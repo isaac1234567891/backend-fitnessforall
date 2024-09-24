@@ -9,7 +9,15 @@ function generateToken ( payload ) {
     );
 }
 
+function verifyToken ( token ) {
+    return jwt.verify( 
+        token,                      // Token valido 
+        process.env.JWT_SEED        // Seed: Palabra Secreta (Semilla) 
+    );
+}
+
 
 module.exports = {
-    generateToken
+    generateToken,
+    verifyToken
 };
