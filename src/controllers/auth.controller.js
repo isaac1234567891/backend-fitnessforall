@@ -93,29 +93,13 @@ async function login( req, res ) {
 }
 
 function reNewToken( req, res ) {
-    const token = req.header( 'X-Token' );
-    console.log( token );
+    // Paso 1: Obtener el payload del objeto Request
+    const payload = req.authUser;
 
-    // Paso 1: Verificar que el Token es valido y extraer el payload
-    const payload = verifyToken( token );
-
-    if( ! payload ) {
-        return res.json({
-            ok: false,
-            msg: 'Token invalido'
-        });
-    }
-
-    // Paso 2: Elimina las propiedades adicionales
-    delete payload.iat;
-    delete payload.exp;
- 
-    console.log( payload );
-
-    //  Paso 3: Genera nuevo Token con payload del Token anterior
+    // Paso 2: Genera nuevo Token con payload del Token anterior
     const newToken = generateToken( payload );
 
-    // Paso4: Envia el Token al cliente
+    // Paso 3: Envia el Token al cliente
     res.json({
         ok: true,
         token: newToken
