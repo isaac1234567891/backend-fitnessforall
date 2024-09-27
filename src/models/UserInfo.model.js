@@ -13,10 +13,10 @@ const UserInfoSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    // userId: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'users'
-    // }
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'users'
+    }
 }, {
     timestamps: true    // Agrega campos de fecha: creacion y actualizacion del documento
 });
