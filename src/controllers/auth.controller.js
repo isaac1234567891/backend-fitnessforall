@@ -1,7 +1,5 @@
 const { verifyEncriptedPassword } = require("../helpers/bcrypt.helper");
-
 const { dbGetUserByUsername, dbRegisterUser } = require("../services/auth.service");
-
 const { generateToken } = require( '../helpers/jwt.helper' );
 
 async function register( req, res ) {
