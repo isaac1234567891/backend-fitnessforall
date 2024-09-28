@@ -1,4 +1,6 @@
-const { dbInsertRoutine, dbUpdateRoutine } = require("../services/routine.service");
+const { dbInsertRoutine, dbUpdateRoutine, dbDeleteRoutine } = require("../services/routine.service");
+
+// Muestra todos los productos registrados
 
 async function createRoutine( req, res ) {
     const payload = req.authUser;
@@ -47,7 +49,28 @@ async function updatedRoutinePatch (req, res) {
     }
 }
 
+async function deleteRoutine (req, res) {
+    const routineId = req.params.id;
+
+    try{
+        const data = await dbDeleteRoutine(routineId);
+
+        res.status(200).json({
+            ok:true,
+            data
+        });
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({
+            ok:false,
+            msg: 'Error al eliminar una rutina por ID'
+        });
+    }
+}
+
 module.exports = {
     createRoutine,
-    updatedRoutinePatch
+    updatedRoutinePatch,
+    deleteRoutine
 }
