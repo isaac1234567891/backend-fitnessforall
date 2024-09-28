@@ -10,43 +10,39 @@ const RoutineSchema = new Schema({
         type: String,       // Define tipo          (regla 1)
         required: true
     },
-    series: {
-        type: Number,
-        default: 4,
-        min: 2
-    },
     repetitionsStrength: {
         type: Number,
         default: 12,
         min: 10
     },
-    averageWeightStrength: {
-        type: String,
-        required: true
+    averageSetsStrength: {
+        type: Number,
+        default: 4,
+        min: 2
     },
     repetitionsEndurance: {
         type: Number,
         default: 18,
         min: 15
     },
-    averageWeightEndurance: {
-        type: String,
-        required: true
+    averageSetsEndurance: {
+        type: Number,
+        default: 4,
+        min: 2
     },
     repetitionsHypertrophy: {
         type: Number,
         default: 8,
         min: 6
     },
-    averageWeightHypertrophy: {
+    averageSetstHypertrophy: {
+        type: Number,
+        default: 4,
+        min: 2
+    },
+    description: {
         type: String,
         required: true
-    },
-    description: String,   /** Equivale a --> description: { type: String } */
-    price: {                // Nombre de la propiedad
-        type: Number,       // Define tipo          (regla 1)
-        default: 0,         // Valor por defecto    (regla 2)
-        min: 0              // Valor minimo         (regla 3)
     },
     muscleGroup: {
         type: String,
