@@ -1,5 +1,22 @@
 
-const { dbInsertUserInfo, dbGetUserInfo } = require('../services/userinfo.service');
+const { dbInsertUserInfo, dbGetUserInfo, dbUpdateUserInfo } = require('../services/userinfo.service');
+async function getUserInfo(req,res) {
+    try {
+        const data = await dbGetUserInfo();
+
+        res.status( 200 ).json({
+            ok: true,
+            data
+        });    
+    } 
+    catch ( error ) {
+        console.error( error );
+        res.status( 500 ).json({
+            ok: false,
+            msg: 'Error al obtner la lista de toda la informacion de los usuarios'
+        });
+    }
+}
 
 async function createuserinfo( req, res ) {
 
@@ -25,9 +42,12 @@ async function createuserinfo( req, res ) {
 
 }
 
-async function getUserInfo(req,res) {
+async function updateUserInfo( req, res ) {
+    const UserInfotId = req.params.id;
+    const inputData = req.body;
+
     try {
-        const data = await dbGetUserInfo();
+        const data = await dbUpdateUserInfo( UserInfotId, inputData );
 
         res.status( 200 ).json({
             ok: true,
@@ -38,8 +58,33 @@ async function getUserInfo(req,res) {
         console.error( error );
         res.status( 500 ).json({
             ok: false,
-            msg: 'Error al obtner la lista de toda la informacion de los usuarios'
-        });
+            msg: 'Error al actualizar usuario'
+        })   
     }
 }
-module.exports = {createuserinfo, getUserInfo};
+
+async function deleteProduct( req, res ) {
+    const productId = req.params.id;
+    /** ! TODO: Validar cuando no encuentra un producto y responder al usuario */
+
+    try {
+        const data = await dbDeleteProduct( productId );
+
+        res.status( 200 ).json({
+            ok: true,
+            data
+        });    
+    } 
+    catch ( error ) {
+        console.error( error );
+        res.status( 500 ).json({
+            ok: false,
+            msg: 'Error al eliminar un producto por ID'
+        })
+    }
+
+    
+}
+
+
+module.exports = {createuserinfo, getUserInfo, updateUserInfo};
