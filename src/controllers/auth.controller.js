@@ -1,8 +1,6 @@
 const { verifyEncriptedPassword } = require("../helpers/bcrypt.helper");
-const UserModel = require("../models/User.model");
 const { dbGetUserByUsername, dbRegisterUser } = require("../services/auth.service");
-
-const { generateToken, verifyToken } = require( '../helpers/jwt.helper' );
+const { generateToken } = require( '../helpers/jwt.helper' );
 
 async function register( req, res ) {
     // Paso 1: Obtener los datos a registrar (usuario)
@@ -105,7 +103,6 @@ function reNewToken( req, res ) {
         token: newToken
     });
 }
-   
 
 module.exports = {
     register,

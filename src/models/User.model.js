@@ -5,6 +5,14 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    lastname: {
+        type: String,
+        required: true
+    },
+    gender: {
+        type: String,
+        required: true
+    },
     /** username: [ ] # identificacion, [ ] alias, [x] correo electronico */
     username: {
         type: String,
@@ -12,6 +20,10 @@ const UserSchema = new mongoose.Schema({
         unique: true
     }, 
     password: {
+        type: String,
+        required: true
+    },
+    mobile: {
         type: String,
         required: true
     },
