@@ -1,6 +1,24 @@
-const { dbInsertRoutine, dbUpdateRoutine, dbDeleteRoutine } = require("../services/routine.service");
+const { dbInsertRoutine, dbUpdateRoutine, dbDeleteRoutine, dbGetRoutines } = require("../services/routine.service");
 
 // Muestra todos los productos registrados
+async function getRoutines(req, res) {
+    /** ! TODO: Obtener los productos paginados */
+    try{
+        const data = await dbGetRoutines();
+
+        res.status(200).json({
+            ok: true,
+            data
+        });
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Error al obtener todas las rutinas'
+        });
+    }
+}
 
 async function createRoutine( req, res ) {
     const payload = req.authUser;
@@ -70,6 +88,7 @@ async function deleteRoutine (req, res) {
 }
 
 module.exports = {
+    getRoutines,
     createRoutine,
     updatedRoutinePatch,
     deleteRoutine
