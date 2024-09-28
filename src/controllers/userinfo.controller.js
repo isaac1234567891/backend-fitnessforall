@@ -10,7 +10,13 @@ async function createuserinfo( req, res ) {
     try {
         const data = await dbInsertUserInfo( inputData );
         console.log( data );            // Testing
-    
+        if( data ) {
+            return res.json({
+                ok: false,
+                msg: 'El usuario ya existe.'
+            });
+        }
+
         res.status( 201 ).json({
             ok: true,
             data           // ECMAScript data: data ---> data
