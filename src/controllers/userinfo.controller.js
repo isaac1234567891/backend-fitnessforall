@@ -1,5 +1,5 @@
 
-const { dbInsertUserInfo, dbGetUserInfo, dbUpdateUserInfo } = require('../services/userinfo.service');
+const { dbInsertUserInfo, dbGetUserInfo, dbUpdateUserInfo, dbDeleteUserInfo } = require('../services/userinfo.service');
 async function getUserInfo(req,res) {
     try {
         const data = await dbGetUserInfo();
@@ -63,12 +63,12 @@ async function updateUserInfo( req, res ) {
     }
 }
 
-async function deleteProduct( req, res ) {
+async function deleteUserInfo( req, res ) {
     const productId = req.params.id;
     /** ! TODO: Validar cuando no encuentra un producto y responder al usuario */
 
     try {
-        const data = await dbDeleteProduct( productId );
+        const data = await dbDeleteUserInfo( productId );
 
         res.status( 200 ).json({
             ok: true,
@@ -87,4 +87,4 @@ async function deleteProduct( req, res ) {
 }
 
 
-module.exports = {createuserinfo, getUserInfo, updateUserInfo};
+module.exports = {createuserinfo, getUserInfo, updateUserInfo, deleteUserInfo};

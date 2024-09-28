@@ -1,5 +1,5 @@
 const express = require( 'express' );
-const {createuserinfo, getUserInfo, updateUserInfo} = require('../controllers/userinfo.controller');
+const {createuserinfo, getUserInfo, updateUserInfo, deleteUserInfo} = require('../controllers/userinfo.controller');
 const { authUser } = require('../middlewares/auth-user.middleware');
 const router = express.Router();
 
@@ -10,8 +10,8 @@ const router = express.Router();
 // Crear un usuario --> http://localhost:3000/api/auth/register
 router.post( '/', createuserinfo );
 router.get('/', getUserInfo);
-router.patch('/', authUser,updateUserInfo);
-
+router.patch('/:id', authUser,updateUserInfo);
+router.delete('/:id', authUser,deleteUserInfo);
 
 
 module.exports = router;
