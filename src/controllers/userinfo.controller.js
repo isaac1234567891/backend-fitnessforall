@@ -1,5 +1,5 @@
 
-const { dbInsertUserInfo } = require('../services/userinfo.service');
+const { dbInsertUserInfo, dbGetUserInfo } = require('../services/userinfo.service');
 
 async function createuserinfo( req, res ) {
 
@@ -32,4 +32,21 @@ async function createuserinfo( req, res ) {
 
 }
 
-module.exports = createuserinfo;
+async function getUserInfo(req,res) {
+    try {
+        const data = await dbGetUserInfo();
+
+        res.status( 200 ).json({
+            ok: true,
+            data
+        });    
+    } 
+    catch ( error ) {
+        console.error( error );
+        res.status( 500 ).json({
+            ok: false,
+            msg: 'Error al obtner la lista de toda la informacion de los usuarios'
+        });
+    }
+}
+module.exports = {createuserinfo, getUserInfo};
