@@ -1,4 +1,4 @@
-const { dbInsertRoutine, dbUpdateRoutine, dbDeleteRoutine, dbGetRoutines } = require("../services/routine.service");
+const { dbInsertRoutine, dbUpdateRoutine, dbDeleteRoutine, dbGetRoutines, dbGetRoutineById } = require("../services/routine.service");
 
 // Muestra todos los productos registrados
 async function getRoutines(req, res) {
@@ -17,6 +17,33 @@ async function getRoutines(req, res) {
             ok: false,
             msg: 'Error al obtener todas las rutinas'
         });
+    }
+}
+
+async function getRoutineById (req, res) {
+    const routineId = req.params.id;
+
+    try{
+        const data = await dbGetRoutineById(routineId);
+
+        if(!data) {
+            res.status(404).json({
+                ok: false,
+                msg: 'Rutina no encontrada'
+            });
+        }
+
+        res.status(200).json({
+            ok: true,
+            data
+        });
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({
+            ok:false,
+            msg: 'Error al obtener una rutina por ID'
+        })
     }
 }
 
@@ -89,6 +116,7 @@ async function deleteRoutine (req, res) {
 
 module.exports = {
     getRoutines,
+    getRoutineById,
     createRoutine,
     updatedRoutinePatch,
     deleteRoutine
