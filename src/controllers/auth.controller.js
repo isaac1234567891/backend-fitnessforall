@@ -1,32 +1,52 @@
 const { verifyEncriptedPassword } = require("../helpers/bcrypt.helper");
 const { dbGetUserByUsername, dbRegisterUser } = require("../services/auth.service");
 const { generateToken } = require( '../helpers/jwt.helper' );
+const { dbInsertUserInfo } = require("../services/userinfo.service");
 
 async function register( req, res ) {
     // Paso 1: Obtener los datos a registrar (usuario)
     const inputData = req.body;
+    
 
+    const UserData = {
+        name: inputData.name,
+        lastname: inputData.lastname,
+        gender: inputData.gender,
+        username: inputData.username, 
+        password: inputData.password,
+        mobile: inputData.mobile
+    }
+
+    
     try {
         // Paso 2: Verificar si el usuario existe BD  ---> email
         const userFound = await dbGetUserByUsername( inputData.username );
-
+        
+            
         if( userFound ) {
             return res.json({
                 ok: false,
                 msg: 'El usuario ya existe.'
             });
         }
-
-        // Paso 3: Registrar usuario (No existe)
-        const data =  await dbRegisterUser( inputData );
-        console.log( data );   
         
+        // Paso 3: Registrar usuario (No existe)
+        const data =  await dbRegisterUser( UserData );
+        console.log( data );   
+        const UserInfoData = {
+            age: inputData.age,
+            weight: inputData.weight,
+            height: inputData.height,
+            userId: data._id
+        }
+        const UserInfoFound = await dbInsertUserInfo(UserInfoData);
         // Paso Opcional: Generar las credenciales (Token) y esto autenticara al usuario
 
         // Paso 4: Responder al cliente, si el usuario a sido registrado
         res.json({
             ok: true,
-            data
+            data,
+            UserInfoFound
         });
     } 
     catch ( error ) {

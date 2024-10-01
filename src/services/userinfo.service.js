@@ -11,7 +11,9 @@ const dbGetUserInfo = async () => {
 const dbGetUserInfoById = async ( _id ) => {
     return await UserInfoModel.findOne({ _id });
 }
-
+const dbGetUserinfoByUserId = async (userId) => {
+    return await UserInfoModel.findOne({userId})
+}
 const dbInsertUserInfo = async ( newUserInfo ) => {
     return await UserInfoModel.create( newUserInfo );
 }
@@ -32,6 +34,7 @@ const dbDeleteUserInfo = async ( id ) => {
 module.exports = {
     dbGetUserInfo,
     dbGetUserInfoById,
+    dbGetUserinfoByUserId,
     dbInsertUserInfo,
     dbUpdateUserInfo,
     dbDeleteUserInfo
