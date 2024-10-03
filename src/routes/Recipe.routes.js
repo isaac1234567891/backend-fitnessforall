@@ -17,4 +17,6 @@ router.get( '/:id', getRecipeById );                   // Obtiene un producto po
 router.patch( '/:id', authUser, updateRecipePatch );    // Actualiza parcialmente los campos de un producto
 router.delete( '/:id', authUser, deleteRecipe );        // Elimina un producto
 
+
+
 module.exports = router;

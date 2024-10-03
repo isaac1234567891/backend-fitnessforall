@@ -25,4 +25,3 @@ app.use( '/api/categories', require( './routes/categories.routes' ) );
 app.listen( PORT, function() {
     console.log( 'Servidor corriendo en puerto ' + PORT );
 });
-
