@@ -20,10 +20,13 @@ app.use("/api/userinfo", require('./routes/userinfo.routes'));         // Middle
 
 app.use( '/api/recipes', require( './routes/Recipe.routes' ) );          // Middleware: Activa solicitudes que comienzan con el prefijo /api/auth
 
+app.use( '/api/categories', require( './routes/categories.routes' ) );  
+
 /** Lanzamos el servidor en puerto indicado 
  * http://localhost:3000
 */
 app.listen( PORT, function() {
+    HEAD
     console.log( 'Servidor corriendo en puerto' + PORT );
 });
 
