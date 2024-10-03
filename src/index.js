@@ -24,6 +24,6 @@ app.use( '/api/recipes', require( './routes/Recipe.routes' ) );          // Midd
  * http://localhost:3000
 */
 app.listen( PORT, function() {
-    console.log( 'Servidor corriendo en puerto ' + PORT );
+    console.log( 'Servidor corriendo en puerto' + PORT );
 });
 
