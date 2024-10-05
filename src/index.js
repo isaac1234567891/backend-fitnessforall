@@ -1,4 +1,6 @@
 const express = require( 'express' );
+const cors = require('cors');
+
 const app = express();
 const PORT = process.env.PORT;
 
@@ -9,6 +11,7 @@ const dbConection = require( './config/mongo.config' );
 dbConection();
 
 /** MIDDLEWARE: */
+app.use( cors() );                      // middleware: permite compartir rescursos a terceros
 app.use( express.json() );              // Middleware: Permite manejar JSON en las solicitudes
 
 /** EndPoints de nuestro servidor */
@@ -26,7 +29,6 @@ app.use( '/api/categories', require( './routes/categories.routes' ) );
  * http://localhost:3000
 */
 app.listen( PORT, function() {
-    HEAD
     console.log( 'Servidor corriendo en puerto' + PORT );
 });
 
