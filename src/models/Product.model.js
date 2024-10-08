@@ -20,7 +20,8 @@ const ProductSchema = new Schema({
     },
     category: {
         type: Schema.Types.ObjectId,
-        ref: 'categories'
+        ref: 'categories',
+        default: 'non-category' 
     },
     urlImage: {
         type: String

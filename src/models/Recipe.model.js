@@ -22,70 +22,35 @@ const RecipeSchema = new mongoose.Schema(
       required: true,
     },
 
-    nutritionalTable: {
-      calories: {
-        value: {
-          type: Number,
-          required: true,
-        },
-        unit: {
-          type: String,
-          required: false,
-        },
-      },
 
-      proteins: {
-        value: {
+    calories: {
         type: Number,
         required: true,
       },
-      unit: {
-        type: String,
-        required: false,
+    proteins: {
+        type: Number,
+        required: true,
       },
+    fats: {
+        type: Number,
+        required: true,
       },
-      fats: {
-        value: {
-            type: Number,
-            required: true,
-          },
-          unit: {
-            type: String,
-            required: false,
-          },
-      },
-      carbohydrates: {
-        value: {
-            type: Number,
-            required: true,
-          },
-          unit: {
-            type: String,
-            required: false,
-          },
-      },
-      fiber: {
-        value: {
-            type: Number,
-            required: true,
-          },
-          unit: {
-            type: String,
-            required: false,
-          },
-      },
-    },
-
-    userId: {
+    carbohydrates: {
+        type: Number,
+        required: true,
+     },
+     fiber: {
+      type: Number,
+      required: true,
+   },
+    
+      userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "users",
-    },
-  },
-  {
-    timestamps: true, // Agrega campos de fecha: creacion y actualizacion del documento
-  }
-);
-
+    }, 
+  },{
+    timestamps: true    // Agrega campos de fecha: creacion y actualizacion del documento
+});
 const RecipeModel = mongoose.model(
   "Recipe", // Nombre de la coleccion
   RecipeSchema // Estructura de datos de nuestro modelo
