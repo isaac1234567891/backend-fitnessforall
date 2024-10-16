@@ -11,6 +11,8 @@ dbConection();
 
 /** MIDDLEWARE: */
 app.use(cors());
+
+app.use( cors() );                      // middleware: permite compartir rescursos a terceros
 app.use( express.json() );              // Middleware: Permite manejar JSON en las solicitudes
 
 /** EndPoints de nuestro servidor */
@@ -30,5 +32,6 @@ app.use( '/api/categories', require( './routes/categories.routes' ) );
  * http://localhost:3000
 */
 app.listen( PORT, function() {
-    console.log( 'Servidor corriendo en puerto ' + PORT );
+    console.log( 'Servidor corriendo en puerto' + PORT );
 });
+
