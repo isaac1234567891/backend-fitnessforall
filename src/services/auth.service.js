@@ -6,7 +6,7 @@ const dbGetUserByUsername = async ( email ) => {
 }
 
 const dbRegisterUser = async ( newUser ) => {
-    const dbUser = new UserModel( newUser);  // Prepara los datos en JSON para registrar en MongoDB 
+    const dbUser = new UserModel( newUser );  // Prepara los datos en JSON para registrar en MongoDB 
 
     const hashPassword = encryptedPassword( dbUser.password );
     // console.log( hashPassword );
