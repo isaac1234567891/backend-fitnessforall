@@ -62,5 +62,4 @@ const RoutineModel = model(
     RoutineSchema
 );
 
-
 module.exports = RoutineModel;      // Exportamos el modelo

@@ -17,6 +17,8 @@ app.use( express.json() );              // Middleware: Permite manejar JSON en l
 app.use( '/api/products', require( './routes/product.routes' ) );   // Middleware: Activa solicitudes que comienzan con el prefijo /api/products
 app.use( '/api/auth', require( './routes/auth.routes' ) );          // Middleware: Activa solicitudes que comienzan con el prefijo /api/auth
 app.use('/api/routines', require('./routes/routine.routes'));
+app.use( '/api/supplements', require( './routes/supplement.routes' ) );  
+
 app.use('/api/user', require('./routes/user.routes'));
 app.use("/api/userinfo", require('./routes/userinfo.routes'));         // Middleware: Activa solicitudes que comienzan con el prefijo /api/auth
 
