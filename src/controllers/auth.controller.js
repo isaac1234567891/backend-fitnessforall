@@ -94,12 +94,15 @@ async function login( req, res ) {
         };
         
         const token = generateToken( payload );
-
+        const jsonUser = userFound.toObject()
+        delete jsonUser.__v
+        delete jsonUser.createdAt
+        delete jsonUser.updatedAt
         // Paso 5: Responder al cliente enviandole el Token
         res.json({
             ok: true,
             token, 
-            data: userFound
+            data: jsonUser
         });
 
     } 
