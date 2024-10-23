@@ -1,4 +1,5 @@
 const express = require( 'express' );
+const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT;
 
@@ -9,7 +10,8 @@ const dbConection = require( './config/mongo.config' );
 dbConection();
 
 /** MIDDLEWARE: */
-app.use( express.json() );              // Middleware: Permite manejar JSON en las solicitudes
+app.use( express.json() );
+app.use(cors());             // Middleware: Permite manejar JSON en las solicitudes
 
 /** EndPoints de nuestro servidor */
 app.use( '/api/products', require( './routes/product.routes' ) );   // Middleware: Activa solicitudes que comienzan con el prefijo /api/products
