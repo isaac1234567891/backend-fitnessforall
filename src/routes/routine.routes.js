@@ -1,18 +1,21 @@
 const express = require( 'express' );
-const { authUser } = require('../middlewares/auth-user.middleware');
-const { createRoutine, updatedRoutinePatch, deleteRoutine, getRoutines, getRoutineById } = require('../controllers/routine.controller');
-const { deleteProduct } = require('../controllers/product.controller');
 const router = express.Router();
 
-router.get('/', getRoutines);
+const { getRoutines, createRoutine, updatedRoutinePatch, deleteRoutine, getRoutineById } = require('../controllers/routine.controller');
+const { authUser } = require('../middlewares/auth-user.middleware');
+const { updateRecipePatch } = require('../controllers/Recipe.controller');
 
-router.get('/:id', getRoutineById)
+/** Definir las rutas para la entidad producto
+ * http://localhost:3000/api/routine
+*/
 
-router.post('/', authUser, createRoutine);
+router.post( '/', authUser,createRoutine );           // Crear un producto
 
-router.patch('/:id',authUser, updatedRoutinePatch);
+router.get( '/', getRoutines );                         // Obtiene todos los productos
+router.get( '/:id', getRoutineById );                   // Obtiene un producto por su ID                            
 
-router.delete('/:id', authUser, deleteRoutine);
-
+// // router.put( '/', authUser, updateProductPut );        // Actualiza todos los campos de un producto
+router.patch( '/:id', authUser, updateRecipePatch );    // Actualiza parcialmente los campos de un producto
+router.delete( '/:id', authUser, deleteRoutine );        // Elimina un producto
 
 module.exports = router;
