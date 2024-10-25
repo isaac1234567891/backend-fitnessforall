@@ -22,7 +22,7 @@ async function register( req, res ) {
         // Paso 2: Verificar si el usuario existe BD  ---> email
         const userFound = await dbGetUserByUsername( inputData.username );
         
-            
+            console.log(userFound)
         if( userFound ) {
             return res.json({
                 ok: false,
@@ -40,6 +40,7 @@ async function register( req, res ) {
             userId: data._id
         }
         const UserInfoFound = await dbInsertUserInfo(UserInfoData);
+        
         // Paso Opcional: Generar las credenciales (Token) y esto autenticara al usuario
 
         // Paso 4: Responder al cliente, si el usuario a sido registrado
@@ -93,11 +94,15 @@ async function login( req, res ) {
         };
         
         const token = generateToken( payload );
-
+        const jsonUser = userFound.toObject()
+        delete jsonUser.__v
+        delete jsonUser.createdAt
+        delete jsonUser.updatedAt
         // Paso 5: Responder al cliente enviandole el Token
         res.json({
             ok: true,
-            token
+            token, 
+            data: jsonUser
         });
 
     } 
