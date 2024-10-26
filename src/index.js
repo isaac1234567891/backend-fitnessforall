@@ -5,9 +5,11 @@ const PORT = process.env.PORT;
 
 
 const dbConection = require( './config/mongo.config' );
+const { createDefaultUsers } = require('./config/register-default');
 
 /** Establecer la conexion a MongoDB usando la configuracion */
 dbConection();
+createDefaultUsers();
 
 /** MIDDLEWARE: */
 app.use(cors());
