@@ -83,7 +83,7 @@ function updateSupplementPut( req, res ) {
     });
 }
 
-async function updateSupplementPatch( req, res ) {
+async function updatedSupplementPatch( req, res ) {
     const SupplementId = req.params.id;
     const inputData = req.body;
 
@@ -132,6 +132,6 @@ module.exports = {
     getSupplementById,
     createSupplement,
     updateSupplementPut,
-    updateSupplementPatch,
+    updatedSupplementPatch,
     deleteSupplement
 }
