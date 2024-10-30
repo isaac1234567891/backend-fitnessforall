@@ -60,7 +60,7 @@ async function createRecipe( req, res ) {
     try {
         const data = await dbInsertRecipe( inputData );
         console.log( data );            // Testing
-    
+        data
         res.status( 201 ).json({
             ok: true,
             data           // ECMAScript data: data ---> data

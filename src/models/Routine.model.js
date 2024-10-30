@@ -3,8 +3,9 @@ const { Schema, model } = require( 'mongoose' );
 /** Define el esquema o la estructura de datos que necesita Mongoose para crear sus objetos o documentos */
 const RoutineSchema = new Schema({
     /** Defino los campos que tiene la estructura */
-    urlImage: {
-        type: String
+    image: {
+        type: String,
+    
     },    
     name: {                 // Nombre de la propiedad
         type: String,       // Define tipo          (regla 1)
