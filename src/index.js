@@ -12,8 +12,6 @@ dbConection();
 createDefaultUsers();
 
 /** MIDDLEWARE: */
-app.use(cors());
-
 app.use( cors() );                      // middleware: permite compartir rescursos a terceros
 app.use( express.json() );              // Middleware: Permite manejar JSON en las solicitudes
 
