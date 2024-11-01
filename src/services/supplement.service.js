@@ -15,8 +15,8 @@ const dbInsertSupplement = async ( newSupplement ) => {
 }
 
 const dbUpdateSupplement = async ( id, updatedSupplement ) => {
-    return await SupplementModel.findOneAndUpdate(
-        { _id: id },        // Objeto de consulta
+    return await SupplementModel.findByIdAndUpdate(
+        id,        // Objeto de consulta
         updatedSupplement,     // Objeto con las propiedades y valores a actualizar
         { new: true }       // Configurando la salida de la consulta
     );

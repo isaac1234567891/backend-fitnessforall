@@ -63,7 +63,8 @@ async function createSupplement( req, res ) {
     
         res.status( 201 ).json({
             ok: true,
-            data           // ECMAScript data: data ---> data
+            hola: 'que mas',
+            data: { hola: 'hoasas'}           // ECMAScript data: data ---> data
         });        
     } 
     catch ( error ) {
